@@ -1,2 +1,2 @@
 # minishop-node
-node.js + mongodb
+node.js + express + mongodb
