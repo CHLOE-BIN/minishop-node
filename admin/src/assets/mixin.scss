@@ -1,0 +1,57 @@
+// flex布局
+@mixin flex($row:space-between, $col:center) {
+    display: flex;
+    justify-content: $row;
+    align-items: $col;
+}
+
+// 引入图片样式
+@mixin bgImg($w:0, $h:0, $img:'', $size:contain){
+    display: inline-block;
+    width: $w;
+    height: $h;
+    background: url($img) no-repeat center;
+    background-size: $size;
+}
+
+// 菜单a标签
+@mixin menu-a($color:#b0b0b0) {
+    display: inline-block;
+    color: $color;
+    text-align: center;
+}
+
+// 登录页面输入框
+@mixin input(){
+    margin-bottom: 20px;
+    input {
+        width: 350px;
+        height: 60px;
+        padding-left: 20px;
+        box-sizing: border-box;
+        background-color: $colorJ;
+        border: none;
+        border-radius: 5px;
+        &:focus{
+            border: 1px solid $colorA;
+            box-shadow: 0px 0px 5px #ff6600b9;
+            transition: box-shadow 0.3s;
+        }
+    }
+}
+
+// 购物车选项checkbox
+@mixin checkbox($url:"/imgs/product-detail/icon-selected.png"){
+    display: inline-block;
+    margin: 0 15px 0 25px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid $colorH;
+    vertical-align: middle;
+    cursor: pointer;
+    @include bgImg(
+      20px,
+      20px,
+      $url
+    );
+}

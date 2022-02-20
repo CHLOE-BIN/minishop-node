@@ -12,13 +12,35 @@ const passport = require("passport")
 // 引入User.js
 const User = require("../../models/User");
 
-// $route   GET /users/test
-// @desc    返回请求的json数据 用于测试
+// $route   POST /users
+// @desc    查找指定用户信息
 // @access  public
-router.get("/test", (req, res) => {
-    res.json({ msg: "login works" })
+router.post("/", (req, res) => {
+    const username = req.body.username
+    if (username != null) {
+        User.findOne({ username })
+            .then((user) => {
+                return res.json(user)
+            })
+    } else {
+        return res.status(400).json("未登录")
+    }
 })
 
+// $route   GET /users/all
+// @desc    查找所有用户信息
+// @access  public
+router.get("/all", (req, res) => {
+    User.find()
+        .then(user => {
+            if (!user) {
+                return res.status(404).json("暂无用户")
+            } else {
+                return res.json(user)
+            }
+        })
+        .catch(err => console.log(err))
+})
 
 // $route   POST /users/register
 // @desc    返回用户注册的json数据
@@ -29,7 +51,7 @@ router.post("/register", (req, res) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (user) {
-                return res.status(400).json({ email: "邮箱已注册" })
+                return res.status(400).json("邮箱已注册")
             } else {
                 const newUser = new User({
                     username: req.body.username,
@@ -62,9 +84,9 @@ router.post("/login", (req, res) => {
     User.findOne({ username })
         .then(user => {
             if (!user) {
-                return res.status(404).json({ msg: "用户不存在" })
+                return res.status(400).json("用户不存在")
             }
-
+            // 检验密码是否正确
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
@@ -73,12 +95,12 @@ router.post("/login", (req, res) => {
                             if (err) throw err
                             res.json({
                                 success: true,
-                                token: "Bearer " + token
+                                token: "Bearer " + token,
+                                username,
                             })
                         })
-                        // res.json({ msg: "success" })
                     } else {
-                        return res.status(400).json({ msg: "密码错误" })
+                        return res.status(400).json("密码错误")
                     }
                 })
         })
