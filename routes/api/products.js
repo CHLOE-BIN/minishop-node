@@ -36,24 +36,13 @@ router.post("/add", (req, res) => {
 // @desc    返回所有商品
 // @access  public
 router.get("/", (req, res) => {
-    // const categoryId = req.body.categoryId
     Product.find()
         .then(product => {
             if (!product) {
                 return res.status(404).json("没有商品")
             } else {
-                if (req.body.categoryId) {
-                    Product.find({ categoryId: req.body.categoryId })
-                        .then(product => {
-                            if (product.length != 0) {
-                                res.json(product)
-                            } else {
-                                return res.status(404).json("没有该种类的商品")
-                            }
-                        })
-                } else {
-                    res.json(product)
-                }
+                // res.json(product)
+                return res.status(200).json(product)
             }
         })
         .catch(err => console.log(err))
@@ -66,7 +55,7 @@ router.get("/:productId", (req, res) => {
     Product.findOne({ productId: req.params.productId })
         .then(product => {
             if (product) {
-                res.json(product)
+                return res.status(200).json(product)
             } else {
                 return res.status(404).json("没有该商品")
             }
