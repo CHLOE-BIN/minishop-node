@@ -19,6 +19,8 @@ const users = require("./routes/api/users")
 const products = require("./routes/api/products")
 const ads = require("./routes/api/ads")
 const admins = require("./routes/api/admins")
+const orders = require("./routes/api/orders")
+const carts = require("./routes/api/carts")
 
 // 连接数据库: 从./config/keys.js中获取URI
 const db = require("./config/keys").mongoURI
@@ -40,6 +42,8 @@ app.use("/users", users)
 app.use("/products", products)
 app.use("/ads", ads)
 app.use("/admins", admins)
+app.use("/orders", orders)
+app.use("/carts", carts)
 
 // 监听端口
 const port = process.env.PORT || 5000;

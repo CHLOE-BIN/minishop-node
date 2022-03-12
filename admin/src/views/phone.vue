@@ -90,14 +90,25 @@ export default {
       };
     },
     handleDelete(row) {
-      this.$axios.delete(`/products/delete/${row.productId}`).then(res => {
-        this.$message({
-          message: "商品删除成功",
-          type: "success",
-          duration: 1000
+      this.$confirm("此操作将删除选中的内容, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          //点击确定的操作(调用接口)
+          this.$axios.delete(`/products/delete/${row.productId}`).then(res => {
+            this.$message({
+              message: "商品删除成功",
+              type: "success",
+              duration: 1000
+            });
+            location.reload();
+          });
+        })
+        .catch(() => {
+          //几点取消的提示
         });
-        location.reload();
-      });
     },
     handleAdd() {
       this.dialogBox = {

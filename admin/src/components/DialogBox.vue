@@ -1,6 +1,6 @@
 <template>
   <div class="dialogBox">
-    <el-dialog :title="dialogBox.title" :visible.sync="dialogBox.show">
+    <el-dialog :title="dialogBox.title" :visible.sync="dialogBox.show" :before-close="handleClose">
       <div class="form">
         <el-form :model="productsForm" :rules="rules" ref="form" label-width="100px">
           <el-form-item label="商品类型" prop="categoryId">
@@ -123,6 +123,11 @@ export default {
     },
     cancel() {
       this.dialogBox.show = false;
+      this.$refs.form.clearValidate();
+    },
+    handleClose() {
+      this.dialogBox.show = false;
+      this.$refs.form.clearValidate();
     }
   }
 };

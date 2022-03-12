@@ -27,6 +27,15 @@ const ProductSchema = new Schema({
     price: {
         type: Number
     },
+    showImg: {
+        type: Array
+    },
+    version: {
+        type: Array
+    },
+    color: {
+        type: Array
+    },
     date: {
         type: Date,
         default: Date.now

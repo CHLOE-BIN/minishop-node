@@ -23,6 +23,9 @@ router.post("/add", (req, res) => {
                 if (req.body.subtitle) newProduct.subtitle = req.body.subtitle
                 if (req.body.mainImage) newProduct.mainImage = req.body.mainImage
                 if (req.body.price) newProduct.price = req.body.price
+                if (req.body.showImg) editProduct.showImg = req.body.showImg
+                if (req.body.version) editProduct.version = req.body.version
+                if (req.body.color) editProduct.color = req.body.color
 
                 new Product(newProduct)
                     .save()
@@ -74,6 +77,9 @@ router.post("/edit/:productId", (req, res) => {
     if (req.body.subtitle) editProduct.subtitle = req.body.subtitle
     if (req.body.mainImage) editProduct.mainImage = req.body.mainImage
     if (req.body.price) editProduct.price = req.body.price
+    if (req.body.showImg) editProduct.showImg = req.body.showImg
+    if (req.body.version) editProduct.version = req.body.version
+    if (req.body.color) editProduct.color = req.body.color
 
     Product.findOneAndUpdate(
         { productId: req.params.productId },
