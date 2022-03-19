@@ -7,6 +7,10 @@ const Schema = mongoose.Schema
 
 // 创建Schema
 const CartSchema = new Schema({
+    cartId: {
+        type: String,
+        required: true
+    },
     userId: {
         type: String,
         required: true
@@ -16,6 +20,10 @@ const CartSchema = new Schema({
         required: true
     },
     name: {
+        type: String,
+        required: true
+    },
+    mainImg: {
         type: String,
         required: true
     },
