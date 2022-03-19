@@ -53,13 +53,13 @@ router.post("/register", (req, res) => {
             if (user) {
                 return res.status(400).json("邮箱已注册")
             } else {
+                // 1. 新增用户
                 const newUser = new User({
                     username: req.body.username,
                     password: req.body.password,
                     email: req.body.email
                 })
-
-                // 密码加密
+                // 2. 密码加密
                 bcrypt.genSalt(10, function (err, salt) {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) throw err
