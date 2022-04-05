@@ -17,6 +17,7 @@ const OrderSchema = new Schema({
     },
     productList: {
         type: Array,
+        required: true
     },
     name: {
         type: String,
@@ -31,7 +32,12 @@ const OrderSchema = new Schema({
         required: true
     },
     price: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    is_pay: {
+        type: Boolean,
+        required: true
     },
     date: {
         type: Date,

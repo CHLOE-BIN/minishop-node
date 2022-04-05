@@ -21,11 +21,26 @@ router.post("/add", (req, res) => {
             if (req.body.price) newCart.price = req.body.price
             if (req.body.version) newCart.version = req.body.version
             if (req.body.color) newCart.color = req.body.color
+            if (req.body.num) newCart.num = req.body.num
+            newCart.selected = false
 
             new Cart(newCart)
                 .save()
                 .then(cart => res.json(cart))
                 .catch(err => console.log(err))
+        })
+})
+
+// $route   POST /carts/edit
+// @desc    返回修改了数量的购物车商品
+// @access  public
+router.post("/edit", (req, res) => {
+    Cart.findOneAndUpdate(
+        { cartId: req.body.cartId },
+        { $set: {num: req.body.num, selected: true} },
+        { new: true })
+        .then(cart => {
+            res.json(cart)
         })
 })
 

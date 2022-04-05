@@ -39,6 +39,13 @@ const CartSchema = new Schema({
         type: String,
         required: true
     },
+    num: {
+        type: Number,
+        required: true
+    },
+    selected: {
+        type: Boolean,
+    },
     date: {
         type: Date,
         default: Date.now
